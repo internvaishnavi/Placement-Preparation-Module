@@ -1,0 +1,17 @@
+class Solution {
+    public void search(int i,int[] nums,int t,int size,int[] res){
+        if(i==size) return;
+        if(nums[i]==t){
+            if(res[0]!=-1) res[1]=i;
+            else res[0]=res[1]=i;
+        }
+        search(i+1,nums,t,size,res);
+        return;
+    }
+    public int[] searchRange(int[] nums, int target) {
+        int[] res=new int[2];
+        res[0]=res[1]=-1;
+        search(0,nums,target,nums.length,res);
+        return res;
+    }
+}
