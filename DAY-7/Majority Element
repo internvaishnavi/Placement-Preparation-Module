@@ -1,0 +1,18 @@
+class Solution {
+    public int majorityElement(int[] a) {
+        int n=a.length,i,j,count=1;
+        Arrays.sort(a);
+        for(i=0;i<n-1;i++){
+            j=i+1;
+            while(j<n && a[i]==a[j]){
+                j++;
+                count++;
+            }
+            System.out.println(n/2+ " "+count);
+            if(count>n/2) return a[i];
+            else count=1;
+            i=j-1;
+        }
+        return a[0];
+    }
+}
