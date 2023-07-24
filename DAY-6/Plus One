@@ -1,0 +1,37 @@
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int n=digits.length,carry=1;
+        if(n==0) return digits;
+        if(digits[n-1]!=9){
+            digits[n-1]+=1;
+            return digits;
+        }
+        else{
+            ArrayList<Integer> lst=new ArrayList<>();
+            lst.add(0);
+            for(int i=n-1;i>0;i--){
+                if(digits[i-1]!=9 && carry==1){
+                    lst.add(digits[i-1]+1);
+                    carry=0;
+                }
+                else if(digits[i-1]==9 && carry==1){
+                    lst.add(0);
+                    carry=1;
+                }
+                else if(digits[i-1]==9 && carry==0){
+                    lst.add(digits[i-1]);
+                }
+                else{
+                    lst.add(digits[i-1]);
+                }
+            }
+            if(carry==1) lst.add(1);
+            int m=lst.size();
+            int[] a=new int[m];
+            for(int i=0;i<m;i++){
+                a[i]=lst.get(m-i-1);
+            }
+            return a;
+        }   
+    }
+}
