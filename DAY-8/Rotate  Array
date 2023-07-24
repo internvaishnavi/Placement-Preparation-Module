@@ -1,0 +1,28 @@
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int len=nums.length;
+        if(len==1) return;
+        List<Integer> p1=new ArrayList<>();
+        List<Integer> p2=new ArrayList<>();
+        List<Integer> arr=new ArrayList<>();
+        k=k%len;
+       for(int i=0;i<len-k;i++){
+           p1.add(nums[i]);
+       }
+       for(int i=len-k;i<len;i++){
+           p2.add(nums[i]);
+       }
+       Collections.reverse(p1);
+       Collections.reverse(p2);
+       for(int i=0;i<p1.size();i++){
+           arr.add(p1.get(i));
+       }
+       for(int i=0;i<p2.size();i++){
+           arr.add(p2.get(i));
+       }
+       Collections.reverse(arr);
+       for(int i=0;i<arr.size();i++){
+           nums[i]=arr.get(i);
+       }
+    }
+}
