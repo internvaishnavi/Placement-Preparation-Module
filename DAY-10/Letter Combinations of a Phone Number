@@ -1,0 +1,20 @@
+class Solution {
+    String[] keypad={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    public void combinations(String d,int i,String n,List<String> str){
+        if(i==d.length()){
+            str.add(n);
+            return;
+        }
+        char cur=d.charAt(i);
+        String map=keypad[cur-'0'];
+        for(int j=0;j<map.length();j++){
+            combinations(d,i+1,n+map.charAt(j),str);
+        }
+    }
+    public List<String> letterCombinations(String digits) {
+        List<String> str=new ArrayList<>();
+        if(digits.length()==0) return str;
+        combinations(digits,0,"",str);
+        return str;
+    }
+}
