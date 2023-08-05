@@ -1,0 +1,48 @@
+class Solution {
+    class edge{
+        int scr;
+        int dest;
+
+        edge(int scr,int dest){
+            this.scr=scr;
+            this.dest=dest;
+        }
+        
+    }
+    public void dfs(ArrayList<edge> graphs[],boolean[] visited,int cur,List<Integer> path,List<List<Integer>> lst){
+        path.add(cur);
+        if(cur==graphs.length-1){
+            System.out.println(path);
+            List<Integer> arr =new ArrayList<>();
+            for(int ele:path) arr.add(ele);
+            lst.add(arr);
+            return;
+        }
+        for(int i=0;i<graphs[cur].size();i++){
+            edge e=graphs[cur].get(i);
+            if(visited[e.dest]==false){
+                visited[e.dest]=true;
+                dfs(graphs,visited,e.dest,path,lst);
+                // System.out.println(path+" "+path.size());
+                path.remove(path.size()-1);
+                // System.out.println(path);
+                visited[e.dest]=false;
+            }
+        }
+    }
+    public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        List<List<Integer>> lst=new ArrayList<>();
+        ArrayList<edge> graphs[]=new ArrayList[graph.length];
+        for(int i=0;i<graph.length;i++){
+            graphs[i]=new ArrayList<>();
+        }
+        for(int i=0;i<graph.length;i++){
+            for(int j=0;j<graph[i].length;j++){
+                 graphs[i].add(new edge(i,graph[i][j]));
+            }
+        }
+        List<Integer> path=new ArrayList<>();
+        dfs(graphs,new boolean[graph.length],0,path,lst);
+        return lst;
+    }
+}
